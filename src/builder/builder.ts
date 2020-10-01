@@ -1,67 +1,62 @@
-import { Result } from './result'
+import { Car, CarInterface, CorpusType, CarTypes, WheelsType, Engines } from './Car'
 
 export interface Builder {
-  reset(): void
-  setEngine(engine: string): void
+  setCarType(carType: CarTypes): void
+  setEngine(engine: Engines): void
   setCorpus(corpusType: string): void
   setSeats(seatsCount: number): void
-  getResult(): void
+  setAmortization(): void
+  setTrailer(): void
+  setWheels(wheelsType: WheelsType): void
+  setColor(color: string): void
 }
 
-export interface CarBuilderInterface extends Builder {
-  getResult(): Result
-}
-export class CarBuilder implements CarBuilderInterface {
-  private result: Result
+export class CarBuilder implements Builder {
+  private product!: Car
+
   constructor() {
-    this.result = {} as Result
+    this.reset()
+  }
+  public reset() {
+    this.product = new Car()
   }
 
-  reset() {
-    this.result = {} as Result
+  public setEngine(engine: Engines): void {
+    this.product.result.engine = engine
   }
 
-  setEngine(engine: string): void {
-    this.result.engine = engine
+  public setCorpus(corpusType: CorpusType): void {
+    this.product.result.corpus = corpusType
   }
 
-  setCorpus(corpusType: string): void {
-    this.result.corpus = corpusType
+  public setSeats(seatsCount: number): void {
+    this.product.result.seats = seatsCount
   }
 
-  setSeats(seatsCount: number): void {
-    this.result.seats = seatsCount
+  public setAmortization(): void {
+    this.product.result.amortization = true
   }
 
-  getResult(): Result {
-    return this.result
+  public setCarType(carType: CarTypes): void {
+    this.product.result.carType = carType
+  }
+
+  public setColor(color: string): void {
+    this.product.result.color = color
+  }
+
+  public setTrailer(): void {
+    this.product.result.trailer = true
+  }
+
+  public setWheels(wheelsType: WheelsType): void {
+    this.product.result.wheels = wheelsType
+  }
+
+  public getProduct(): Car {
+    const result = this.product
+    this.reset()
+    return result
   }
 
 }
-
-//export class BoatBuilder implements Builder {
-  //private result: Result
-  //constructor() {
-    //this.result = {} as Result
-  //}
-
-  //reset() {
-    //this.result = {} as Result
-  //}
-
-  //setEngine(engine: string): void {
-    //this.result.engine = engine
-  //}
-  //setCorpus(corpusType: string): void {
-    //this.result.corpus = corpusType;
-  //}
-
-  //setSeats(seatsCount: number): void {
-    //this.result.seats = seatsCount
-  //}
-
-  //getResult(): Result {
-    //return this.result
-  //}
-
-//}

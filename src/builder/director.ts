@@ -1,47 +1,66 @@
 import {injectable, inject} from "tsyringe"
-import { OrderDetails } from './OrderDetails'
-import { Builder, CarBuilder } from './builder'
-import { Result } from './result'
-import { CarTypes } from './CarTypes'
-
-
+import { Builder } from './builder'
+import { CarTypes, CorpusType, Order, OrderToPerform, WheelsType, Engines } from './Car'
 
 @injectable()
 export class Director {
-  private builder
+  private builder!: Builder
   private carTypeMapping: {
-    [key in CarTypes]: (requirements: OrderDetails) => void
+    [key in CarTypes]: (order: OrderToPerform) => void
   }
-  constructor(builder: Builder) {
-    this.builder = builder
+
+  constructor() {
     this.carTypeMapping = {
       [CarTypes.SPORT]: this.createSportCar,
-      [CarTypes.CIVIL]: this.createCivilCar,
-      [CarTypes.MILITARY]: this.createMilitaryCar
+      [CarTypes.PASSENGER]: this.createPassengerCar,
+      [CarTypes.TRUCK]: this.createTruck,
+      [CarTypes.TOY_CAR]: this.createToyCar
     }
   }
 
-  setBuilder(builder: Builder): void {
+  public setBuilder(builder: Builder): void {
     this.builder = builder;
   }
 
-  createSportCar() {
-
+  private createSportCar = (order: OrderToPerform) => {
+    this.builder.setCarType(CarTypes.SPORT);
+    this.builder.setEngine(order.engine)
+    this.builder.setAmortization()
+    this.builder.setSeats(2)
+    this.builder.setColor(order.color)
+    this.builder.setCorpus(order.corpus)
+    this.builder.setWheels(WheelsType.NORMAL)
   }
 
-  createCivilCar() {
-
+  private createPassengerCar = (order: OrderToPerform) => {
+    this.builder.setCarType(CarTypes.PASSENGER)
+    this.builder.setEngine(order.engine)
+    this.builder.setSeats(4)
+    this.builder.setColor(order.color)
+    this.builder.setCorpus(order.corpus)
+    this.builder.setWheels(WheelsType.NORMAL)
   }
 
-  createMilitaryCar() {
-
+  private createTruck = (order: OrderToPerform) => {
+    this.builder.setCarType(CarTypes.TRUCK)
+    this.builder.setEngine(order.engine)
+    this.builder.setTrailer()
+    this.builder.setCorpus(order.corpus)
+    this.builder.setWheels(WheelsType.BIG)
+    this.builder.setColor(order.color)
+    this.builder.setSeats(2)
   }
 
-  make(product: Result) {
-    this.builder.setCorpus(product.corpus)
-    this.builder.setEngine(product.engine)
-    this.builder.setSeats(product.seats)
-    return this.builder.getResult()
+  private createToyCar = (order: OrderToPerform) => {
+    this.builder.setCarType(CarTypes.TOY_CAR)
+    this.builder.setCorpus(CorpusType.PLASTIC)
+    this.builder.setWheels(WheelsType.SMALL)
+    this.builder.setColor(order.color)
+    this.builder.setSeats(4)
+  }
+
+  public make(order: Order) {
+    this.carTypeMapping[order.carType](order)
   }
 
 }
