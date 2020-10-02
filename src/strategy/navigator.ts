@@ -6,21 +6,13 @@ export interface Navigator {
 }
 
 export class RouteNavigator implements Navigator {
-  private strategy: RouteStrategy | null
-
-  constructor() {
-    this.strategy = null
-  }
+  private strategy!: RouteStrategy
 
   setStrategy(strategy: RouteStrategy): void {
     this.strategy = strategy
   }
 
   buildRoute(a: number, b: number): string {
-    if(this.strategy) {
-      return this.strategy.buildRoute(a, b)
-    } else {
-      throw new Error('You have to set route strategy')
-    }
+    return this.strategy.buildRoute(a, b)
   }
 }
