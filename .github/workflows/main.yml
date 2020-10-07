@@ -34,4 +34,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: NPM INSTALL
+        run: npm install
+
+      - name: RUN TESTS
         run: npm run test
