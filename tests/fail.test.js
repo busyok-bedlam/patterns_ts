@@ -1,3 +1,3 @@
 test('fail', () => {
-  expect(3).toBe(2)
+  expect(3).toBe(3)
 })
