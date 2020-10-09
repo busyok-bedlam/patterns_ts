@@ -13,7 +13,7 @@ export class Originator {
     this.state = this.generateRandomString(30);
   }
 
-  private generateRandomString(length: number = 10): string {
+  private generateRandomString(length = 10): string {
     const charSet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     return new Array(length).fill(null).map(() => charSet.charAt(Math.floor(Math.random() * charSet.length))).join('');
   }

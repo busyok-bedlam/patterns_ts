@@ -3,7 +3,7 @@ export interface Notifier {
 }
 
 export class MailNotifier implements Notifier {
-  send(message: string) {
+  send(message: string): void {
     console.log(`send email message: ${message}`)
   }
 }

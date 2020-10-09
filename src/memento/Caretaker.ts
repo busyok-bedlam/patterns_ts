@@ -21,7 +21,7 @@ export class Caretaker {
     this.originator.restore(memento!)
   }
 
-  public showHistory() {
+  public showHistory(): void {
     if(!this.mementos.length) {
       console.log('There is no operations in history')
       return

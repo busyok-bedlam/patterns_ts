@@ -1,4 +1,4 @@
-import { Car, CarInterface, CorpusType, CarTypes, WheelsType, Engines } from './Car'
+import { Car, CorpusType, CarTypes, WheelsType, Engines } from './Car'
 
 export interface Builder {
   setCarType(carType: CarTypes): void
@@ -17,7 +17,7 @@ export class CarBuilder implements Builder {
   constructor() {
     this.reset()
   }
-  public reset() {
+  public reset(): void {
     this.product = new Car()
   }
 
