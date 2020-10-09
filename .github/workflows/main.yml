@@ -32,7 +32,7 @@ jobs:
         run: npm install
 
       - name: RUN LINT
-      - run: npm run lint
+        run: npm run lint
 
       - name: RUN TESTS
         run: npm run test
