@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jest"
+    "test": "jest",
+    "lint": "./node_modules/.bin/eslint . --ext .ts"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,9 @@
     "tsyringe": "^4.3.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.4.0",
+    "@typescript-eslint/parser": "^4.4.0",
+    "eslint": "^7.10.0",
     "jest": "^26.5.2",
     "typescript": "^4.0.3"
   }

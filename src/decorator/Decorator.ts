@@ -1,4 +1,4 @@
-import { Notifier, MailNotifier  } from './Notifier'
+import { Notifier } from './Notifier'
 
 export class BaseDecorator implements Notifier {
   private component: Notifier
@@ -12,7 +12,7 @@ export class BaseDecorator implements Notifier {
 }
 
 export class SMSNotifier extends BaseDecorator {
-  public send(message: string) {
+  public send(message: string): void {
     super.send(message)
     this.sendSMS(message)
   }
@@ -22,7 +22,7 @@ export class SMSNotifier extends BaseDecorator {
 }
 
 export class FacebookNotifier extends BaseDecorator {
-  public send(message: string) {
+  public send(message: string): void {
     super.send(message)
     this.sendFacebookMessage(message)
   }
@@ -33,7 +33,7 @@ export class FacebookNotifier extends BaseDecorator {
 }
 
 export class SlackNotifier extends BaseDecorator {
-  public send(message: string) {
+  public send(message: string): void {
     super.send(message)
     this.sendSlackMessage(message)
   }

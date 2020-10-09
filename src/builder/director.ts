@@ -1,6 +1,6 @@
-import {injectable, inject} from "tsyringe"
+import {injectable } from "tsyringe"
 import { Builder } from './builder'
-import { CarTypes, CorpusType, Order, OrderToPerform, WheelsType, Engines } from './Car'
+import { CarTypes, CorpusType, Order, OrderToPerform, WheelsType } from './Car'
 
 @injectable()
 export class Director {
@@ -59,7 +59,7 @@ export class Director {
     this.builder.setSeats(4)
   }
 
-  public make(order: Order) {
+  public make(order: Order): void {
     this.carTypeMapping[order.carType](order)
   }
 
